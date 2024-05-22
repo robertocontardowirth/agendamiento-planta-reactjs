@@ -38,9 +38,10 @@
 .button-row{display:flex;justify-content: center!important;gap: 20px;}
 
 .App-btn{display: inline-block; padding: 0.75rem; width:100%; font-size: 1rem; line-height: 1.5;  text-align: center; vertical-align: middle; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; user-select: none; border: none; border-radius: 10px; background: #888; transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out; font-weight:400; text-transform: uppercase;text-decoration: none;}
+.App-btn[disabled]{opacity: .8;cursor: not-allowed;}
 
 .App-btn svg {vertical-align: middle;}
 
 .App-btn-next{background: rgb(56,139,224); background: linear-gradient(135deg, rgba(56,139,224,1) 0%, rgba(25,111,199,1) 100%); margin:1rem 0;color: #FFF;}
-.App-btn-submit{background: rgb(56,139,224); background: linear-gradient(135deg, rgba(56,139,224,1) 0%, rgba(25,111,199,1) 100%); margin:1rem 0;color: #FFF;}
+.App-btn-submit{background: rgb(56, 224, 182); background: linear-gradient(135deg, rgba(56, 224, 182,1) 0%, rgb(25, 199, 179) 100%); margin:1rem 0;color: #15594f;}
 .App-btn-back{background: rgb(200,200,200); background: linear-gradient(135deg, rgba(200,200,200,1) 0%, rgba(180,180,180,1) 100%); margin:1rem 0;color: #555;}
