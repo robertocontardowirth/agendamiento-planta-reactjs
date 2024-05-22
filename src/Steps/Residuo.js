@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
 import { useAppState } from "../State";
 import { Button, Field, Form, Input } from "../Forms";
+import FeatherIcon from 'feather-icons-react';
  
 export const Residuo = () => {
   const [state, setState] = useAppState();
@@ -10,7 +11,7 @@ export const Residuo = () => {
  
   const saveData = (data) => {
     setState({ ...state, ...data });
-    navigate("/about");
+    navigate("/fecha");
   };
  
   return (
@@ -22,10 +23,10 @@ export const Residuo = () => {
           <Input {...register("degree")} id="degree" />
         </Field>
         <div className="button-row">
-          <Link className={`btn btn-secondary`} to="/">
-            {"<"} Previous
+          <Link className={`App-btn App-btn-back`} to="/">
+            <FeatherIcon icon="chevron-left" size="18" /> Volver
           </Link>
-          <Button>Next {">"}</Button>
+          <Button variant="next">Siguiente <FeatherIcon icon="chevron-right" size="18" /></Button>
         </div>
     </Form>
   );

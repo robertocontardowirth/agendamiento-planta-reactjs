@@ -1,34 +1,37 @@
 import { useLocation } from "react-router-dom";
-import UsersIcon from '../users.svg';
-//import TruckIcon from './truck.svg';
-//import CalendarIcon from './calendar.svg';
-//import CheckCircleIcon from './check-circle.svg';
+import FeatherIcon from 'feather-icons-react';
 
 export const Stepper = () => {
   const location = useLocation();
  
   const getLinkClass = (path) => {
     return (
-      "icono " + (path === location.pathname ? "active" : undefined)
+      "step nav-item " + (path === location.pathname ? "active" : '')
     );
   };
  
   return (
     <nav className="App-stepper">
         <ol className="App-nav">
-          <li className="step nav-item">
-            <span className={getLinkClass("/")}>
-              <img src={UsersIcon} alt="Inicio" className="feather" />
+          <li className={getLinkClass("/")}>
+            <span className="icono">
+                <FeatherIcon icon="users" />
             </span>
           </li>
-          <li className="step nav-item">
-            <span className={getLinkClass("/education")}>Education</span>
+          <li className={getLinkClass("/residuo")}>
+            <span className="icono">
+                <FeatherIcon icon="truck" />
+            </span>
           </li>
-          <li className="step nav-item">
-            <span className={getLinkClass("/about")}>About</span>
+          <li className={getLinkClass("/fecha")}>
+            <span className="icono">
+                <FeatherIcon icon="calendar" />
+            </span>
           </li>
-          <li className="step nav-item">
-            <span className={getLinkClass("/confirm")}>Confirm</span>
+          <li className={getLinkClass("/confirmacion")}>
+            <span className="icono">
+                <FeatherIcon icon="check-circle" />
+            </span>
           </li>
         </ol>
     </nav>

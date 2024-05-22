@@ -1,10 +1,13 @@
 import { useForm } from "react-hook-form";
 import { useAppState } from "../State";
+import { useNavigate, Link } from "react-router-dom";
 import { Button, Form, Section, SectionRow } from "../Forms";
+import FeatherIcon from 'feather-icons-react';
  
 export const Confirmacion = () => {
   const [state] = useAppState();
   const { handleSubmit } = useForm({ defaultValues: state });
+  const navigate = useNavigate();
  
   const submitData = (data) => {
     console.info(data);
@@ -44,8 +47,11 @@ export const Confirmacion = () => {
           <div>{state.about}</div>
         </SectionRow>
       </Section>
-      <div className="d-flex justify-content-start">
-        <Button>Submit</Button>
+      <div className="button-row">
+          <Link className={`App-btn App-btn-back`} to="/fecha">
+            <FeatherIcon icon="chevron-left" size="18" /> Volver
+          </Link>
+        <Button variant="submit">Enviar</Button>
       </div>
     </Form>
   );
