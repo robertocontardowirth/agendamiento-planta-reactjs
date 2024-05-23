@@ -8,3 +8,5 @@ body {
   min-height:1vh;
 }
 body * {box-sizing: border-box;}
+
+p{margin:0;}

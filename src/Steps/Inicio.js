@@ -11,16 +11,12 @@ export const Inicio = () => {
     handleSubmit,
     register,
     watch,
-    formState: { isDirty, isValid, errors },
+    formState: { isValid, errors },
 	setValue
   } = useForm({ defaultValues: state, mode: "onChange" });
-  //const watchPassword = watch("password");
   const navigate = useNavigate();
-
-  console.log(errors)
  
   const saveData = (data) => {
-	console.log(data)
     setState({ ...state, ...data });
     navigate("/residuo");
   };
@@ -61,7 +57,27 @@ export const Inicio = () => {
             id="email"
           />
         </Field>
-        <Field label="RUT Transportista" error={errors?.rutTransportista}>
+		<Field label="RUT Generador" error={errors?.rutGenerador}>
+          <Input
+            {...register("rutGenerador", { 
+            required: {
+              value: true,
+              message: "El RUT de Generador es requerido"
+            },
+            validate: (value) => {
+              return validate(value) || "RUT inválido"
+            },
+            onChange: (event) => {
+              const formattedRut = format(event.target.value)
+              setValue('rutGenerador', formattedRut)
+            }
+          })}
+          minLength="9"
+          maxLength="12"
+                id="rut-generador"
+              />
+        </Field>
+		<Field label="RUT Transportista" error={errors?.rutTransportista}>
           <Input
             {...register("rutTransportista", { 
 				required: {
@@ -81,51 +97,7 @@ export const Inicio = () => {
             id="rut-transportista"
           />
         </Field>
-        <Field label="Patente" error={errors?.patente}>
-          <Input
-            {...register("patente", { 
-				required: "La patente del vehículo es requerido" 
-			})}
-            id="patente"
-          />
-        </Field>
-		<Field label="RUT Generador" error={errors?.rutGenerador}>
-          <Input
-            {...register("rutGenerador", { 
-				required: {
-					value: true,
-					message: "El RUT de Generador es requerido"
-				},
-				validate: (value) => {
-					return validate(value) || "RUT inválido"
-				},
-				onChange: (event) => {
-					const formattedRut = format(event.target.value)
-					setValue('rutGenerador', formattedRut)
-				}
-			})}
-			minLength="9"
-			maxLength="12"
-            id="rut-generador"
-          />
-        </Field>
-        <Field label="Comuna" error={errors?.comuna}>
-          <Input
-            {...register("comuna", { 
-				required: "La comuna es requerida" 
-			})}
-            id="comuna"
-          />
-        </Field>
-        <Field label="Dirección" error={errors?.direccion}>
-          <Input
-            {...register("direccion", { 
-				required: "La direccion es requerida" 
-			})}
-            id="direccion"
-          />
-        </Field>
-        <Button variant="next" disabled={!isDirty || !isValid}>Siguiente <FeatherIcon icon="chevron-right" size="18" /></Button>
+        <Button variant="next" disabled={!isValid}>Siguiente <FeatherIcon icon="chevron-right" size="18" /></Button>
         <pre>
 			{JSON.stringify(watch(), null, 2)}
 		</pre>

@@ -3,7 +3,17 @@ import { createContext, useContext, useState } from "react";
 export const AppStateContext = createContext({});
  
 export function AppProvider({ children }) {
-  const value = useState({});
+  const value = useState({
+    pesaje_agenda: 0,
+    rutCliente: "",
+    email: "",
+    rutGenerador: "",
+    rutTransportista: "",
+    patente: "",
+    direccion: "",
+    comuna: "",
+    residuo: ""
+  });
   return (
     <AppStateContext.Provider value={value}>
       {children}
