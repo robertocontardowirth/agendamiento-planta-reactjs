@@ -13,13 +13,34 @@ export const Residuo = () => {
     register,
     watch,
     formState: { isValid, errors },
-  } = useForm({ defaultValues: state, mode: "onChange" });
+    setValue
+  } = useForm({ defaultValues: state, mode: "onSubmit" });
   const navigate = useNavigate();
  
   const saveData = (data) => {
     setState({ ...state, ...data });
     navigate("/fecha");
   };
+
+  const restarPesaje = (e) => {
+    const pesaje_agenda = watch('pesaje_agenda')
+    let nuevo_pesaje = watch('pesaje_agenda')
+    if (pesaje_agenda > 0){
+      nuevo_pesaje = (parseFloat(pesaje_agenda) - .1).toFixed(1)
+    }
+    setValue("pesaje_agenda", nuevo_pesaje, { shouldValidate : true } )
+    e.preventDefault();
+  }
+
+  const agregarPesaje = (e) => {
+    const pesaje_agenda = watch('pesaje_agenda')
+    let nuevo_pesaje = watch('pesaje_agenda')
+    if (pesaje_agenda < 50){
+      nuevo_pesaje = (parseFloat(pesaje_agenda) + .1).toFixed(1)
+    }
+    setValue("pesaje_agenda", nuevo_pesaje, { shouldValidate : true } )
+    e.preventDefault();
+  }
 
   const comunas = [
     { value: "chocolate", label: "Chocolate" },
@@ -88,14 +109,20 @@ export const Residuo = () => {
             <p className="text-center">
               {watch('pesaje_agenda')} Toneladas
             </p>
-            <div class="row">
-              <div class="col-auto">
-                <FeatherIcon icon="minus" size="18" />
+            <div className="row">
+              <div className="col-auto">
+                <Button variant="icon" onClick={restarPesaje}>
+                  <FeatherIcon icon="minus" size="16" />
+                </Button>
               </div>
-              <div class="col">
+              <div className="col">
                 <Range
                   {...register("pesaje_agenda", {
                     required: "El Tonelaje es requerido",
+                    validate: (value) => {
+                      const pesaje = parseFloat(value)
+                      return (pesaje > 0 && pesaje <= 50) || "Tonelaje inválido"
+                    }
                   })}
                   min="0"
                   max="50"
@@ -103,8 +130,10 @@ export const Residuo = () => {
                   id="pesaje_agenda"
                 />
               </div>
-              <div class="col-auto">
-                <FeatherIcon icon="plus" size="18" />
+              <div className="col-auto">
+                <Button variant="icon" onClick={agregarPesaje}>
+                  <FeatherIcon icon="plus" size="16" />
+                </Button>
               </div>
             </div>
           </>

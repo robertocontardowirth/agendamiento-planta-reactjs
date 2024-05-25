@@ -13,7 +13,7 @@ export const Inicio = () => {
     watch,
     formState: { isValid, errors },
 	setValue
-  } = useForm({ defaultValues: state, mode: "onChange" });
+  } = useForm({ defaultValues: state, mode: "onSubmit" });
   const navigate = useNavigate();
  
   const saveData = (data) => {
